@@ -10,7 +10,7 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "用法: <串口名> 例如:  COM3")
+		fmt.Fprintln(os.Stderr, "用法:  <串口名>  例如:  COM3")
 		os.Exit(1)
 	}
 	port := os.Args[1]
