@@ -1,0 +1,8 @@
+# IDE
+.idea/
+*.iml
+
+# 构建产物
+*.exe
+*.test
+*.out
