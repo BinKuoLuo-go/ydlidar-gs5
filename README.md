@@ -1,6 +1,6 @@
 # GS5-SDK
 
-YDLIDAR GS5 固态激光雷达的 Go SDK。基于官方YDLIDAR GS5 开发手册和官方官方开源SDK源码实现完整的golang版本的GS5雷达串口通信协议与点云解析，供上位机直接集成。
+YDLIDAR GS5 固态激光雷达的 Go SDK。基于官方YDLIDAR GS5 开发手册和官方官方开源SDK源码实现完整的golang版本的GS5雷达串口通信协议与点云解析，供其他go项目集成。
 
 ## 特性
 
@@ -97,5 +97,5 @@ dev, _ := gs5.Open("COM3",
 4. **波特率**：三模块级联需 ≥ 921600（代号 2/3）；设置波特率后 SDK 会自动软重启并重配串口。
 
 ## 参考
-- [@YDLIDAR](https://github.com/YDLIDAR) 官方 SDK：<https://github.com/YDLIDAR/sdk>
+- [@YDLIDAR](https://github.com/YDLIDAR) 官方 SDK：<https://github.com/YDLIDAR/YDLidar-SDK>
   
