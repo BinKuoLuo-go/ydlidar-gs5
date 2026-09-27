@@ -62,7 +62,7 @@ type Frame struct {
 type VersionInfo struct {
 	Address   byte   // 设备地址
 	HWVersion uint8  // 硬件版本号
-	FWVersion uint16 // 固件版本号
+	FWVersion uint16 // 固件版本号（大端序）
 	SerialNo  []byte // 序列号（16 字节，可能包含结尾 0x00）
 }
 

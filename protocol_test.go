@@ -53,9 +53,9 @@ func TestParseParams(t *testing.T) {
 
 func TestParseVersion(t *testing.T) {
 	data := make([]byte, 19)
-	data[0] = 0x01 // hw
-	data[1] = 0x34 // fw LSB
-	data[2] = 0x12 // fw MSB -> 0x1234
+	data[0] = 0x01                            // hw
+	data[1] = 0x12                            // fw 高字节（大端）
+	data[2] = 0x34                            // fw 低字节 -> 0x1234
 	copy(data[3:], []byte("SN1234567890123")) // 16 bytes
 	v, err := parseVersion(0x02, data)
 	if err != nil {

@@ -102,7 +102,8 @@ func parseVersion(addr byte, data []byte) (*VersionInfo, error) {
 	return &VersionInfo{
 		Address:   addr,
 		HWVersion: data[0],
-		FWVersion: binary.LittleEndian.Uint16(data[1:3]),
+		// 注意：固件版本号为大端序（高字节在前），与官方 SDK 的字节交换处理一致。
+		FWVersion: binary.BigEndian.Uint16(data[1:3]),
 		SerialNo:  sn,
 	}, nil
 }
