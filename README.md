@@ -95,3 +95,7 @@ dev, _ := gs5.Open("COM3",
 2. **阻塞**：`GrabFrame`、命令应答读取均为阻塞操作，需确保设备已连接。
 3. **扫描模式**：除停止扫描外，其他命令不能在扫描模式下交互（具体见开发手册）。
 4. **波特率**：三模块级联需 ≥ 921600（代号 2/3）；设置波特率后 SDK 会自动软重启并重配串口。
+
+## 参考
+- [@YDLIDAR](https://github.com/YDLIDAR) 官方 SDK：<https://github.com/YDLIDAR/sdk>
+  
