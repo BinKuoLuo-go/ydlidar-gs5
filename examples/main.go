@@ -38,7 +38,7 @@ func main() {
 		log.Fatalf("启动扫描失败: %v", err)
 	}
 
-	// 读取并打印 10 帧点云
+	// 读取并打印10帧点云
 	for n := 0; n < 10; n++ {
 		frame, err := dev.GrabFrame()
 		if err != nil {
