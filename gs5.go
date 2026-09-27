@@ -33,7 +33,7 @@ import (
 	"fmt"
 )
 
-// DeviceParams 设备角度参数（用于点云解析，见开发手册 3.3/4）。
+// DeviceParams 设备角度参数 用于点云解析
 // K、B 字段由 uint16 原始值除以 10000 得到，Bias 由 int8 原始值除以 10 得到。
 type DeviceParams struct {
 	K0   float64 // 相机角度参数 k0
@@ -58,7 +58,7 @@ type Frame struct {
 	Points  []Point // 160 个测距点
 }
 
-// VersionInfo 设备版本信息（见开发手册 3.2）。
+// VersionInfo 设备版本信息
 type VersionInfo struct {
 	Address   byte   // 设备地址
 	HWVersion uint8  // 硬件版本号

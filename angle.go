@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-// GS5 机械结构固定参数（见开发手册 4 数据解析，与官方 SDK 一致）。
+// GS5 机械结构固定参数
 const (
 	anglePX    = 1.22  // Angle_Px：激光/相机光心 X 方向机械偏移
 	anglePY    = 5.315 // Angle_Py：激光/相机光心 Y 方向机械偏移

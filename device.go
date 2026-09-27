@@ -9,9 +9,9 @@ import (
 	"go.bug.st/serial.v1"
 )
 
-// Device 表示一个已连接的 GS5 设备（可能包含级联的多个模组）。
+// Device 表示一个已连接的 GS5 设备（可能包含级联的多个模组）
 //
-// 注意：Device 的方法并非并发安全，串口读写应限定在单个 goroutine 中调用；
+// 注意：Device 的方法并非并发安全，串口读写应限定在单个 goroutine 中调用
 // 如需并发控制，请调用方自行加锁。
 type Device struct {
 	port     serial.Port
@@ -235,7 +235,7 @@ func (d *Device) GrabFrame() (*Frame, error) {
 	}
 }
 
-// SoftReset 软重启指定地址的模组（Address 只能是 0x01/0x02/0x04，见开发手册 3.7）。
+// SoftReset 软重启指定地址的模组（Address 只能是 0x01/0x02/0x04）。
 func (d *Device) SoftReset(addr byte) error {
 	if addr != AddrDev1 && addr != AddrDev2 && addr != AddrDev3 {
 		return fmt.Errorf("无效复位地址 0x%02X（只能是 0x01/0x02/0x04）", addr)
@@ -252,7 +252,7 @@ func (d *Device) SoftReset(addr byte) error {
 }
 
 // SetBaudRate 设置串口波特率（发送 0x68 广播），随后软重启设备并重配串口。
-// 三模块级联时波特率需 ≥ 921600（代号 2/3）。
+// 三模块级联时波特率需 ≥ 921600
 func (d *Device) SetBaudRate(code uint8) error {
 	if d.scanning {
 		return ErrScanning

@@ -8,7 +8,7 @@ const (
 	DefaultBaudRate = 921600
 )
 
-// GS5 系统命令码（见开发手册 2.2 表 1）。
+// GS5 系统命令码
 const (
 	CmdGetAddress  byte = 0x60 // 获取设备地址
 	CmdGetParams   byte = 0x61 // 获取计算参数
@@ -27,14 +27,14 @@ const (
 	AddrAll  byte = 0x00 // 广播地址（启动/停止所有设备）
 )
 
-// 报文结构常量。报文 = 包头(4) + 地址(1) + 命令(1) + 数据长度(2) + 数据段(N) + 校验码(1)。
+// 报文结构常量 报文 = 包头(4) + 地址(1) + 命令(1) + 数据长度(2) + 数据段(N) + 校验码(1)。
 const (
 	headerByte      byte = 0xA5                  // 包头单字节
 	HeaderLen            = 4                     // 包头长度
 	PacketHeaderLen      = HeaderLen + 1 + 1 + 2 // 包头+地址+命令+数据长度 = 8
 )
 
-// GS5 点云数据格式（见开发手册 3.4）。
+// GS5 点云数据格式
 const (
 	// PointCount 单包测距点数量（S1~S160）。
 	PointCount = 160
@@ -48,7 +48,7 @@ const (
 	PointCloudPacketLen = PacketHeaderLen + PointCloudDataLen + 1
 )
 
-// 波特率代号（见开发手册 3.6）。
+// 波特率代号
 const (
 	Baud230400  uint8 = 0 // 230400 bps
 	Baud512000  uint8 = 1 // 512000 bps
@@ -56,7 +56,7 @@ const (
 	Baud1500000 uint8 = 3 // 1500000 bps
 )
 
-// 各指令发送后的最大等待延时（见开发手册 6-6）。
+// 各指令发送后的最大等待延时
 const (
 	waitGetAddress  = 800 * time.Millisecond // 获取地址
 	waitGetVersion  = 100 * time.Millisecond // 获取版本
