@@ -253,6 +253,12 @@ func (d *Device) SoftReset(addr byte) error {
 
 // SetBaudRate 设置串口波特率（发送 0x68 广播），随后软重启设备并重配串口。
 // 三模块级联时波特率需 ≥ 921600
+/*
+	Baud230400:  230400,  0
+	Baud512000:  512000,  1
+	Baud921600:  921600,  2
+	Baud1500000: 1500000, 3
+*/
 func (d *Device) SetBaudRate(code uint8) error {
 	if d.scanning {
 		return ErrScanning
@@ -262,7 +268,7 @@ func (d *Device) SetBaudRate(code uint8) error {
 		return fmt.Errorf("无效波特率代号 %d（需 0~3）", code)
 	}
 	if len(d.addrs) == 3 && code < Baud921600 {
-		return fmt.Errorf("三模块级联需波特率 ≥ 921600（代号 2/3），当前代号 %d", code)
+		return fmt.Errorf("三模块级联需波特率 ≥ 921600，当前代号 %d", code)
 	}
 	// 设置波特率
 	if err := d.writeCommand(AddrAll, CmdSetBaudRate, []byte{code}); err != nil {
