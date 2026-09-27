@@ -31,7 +31,7 @@ func buildPacket(addr, cmd byte, data []byte) []byte {
 // 返回设备地址、命令码、数据段。
 func readPacket(r io.Reader) (addr, cmd byte, data []byte, err error) {
 	var one [1]byte
-	// 1) 同步包头 0xA5A5A5A5
+	// 同步包头 0xA5A5A5A5
 	matched := 0
 	for matched < HeaderLen {
 		if _, err = io.ReadFull(r, one[:]); err != nil {
@@ -43,7 +43,7 @@ func readPacket(r io.Reader) (addr, cmd byte, data []byte, err error) {
 			matched = 0
 		}
 	}
-	// 2) 跳过可能多出的包头字节，读取设备地址
+	// 跳过可能多出的包头字节，读取设备地址
 	for {
 		if _, err = io.ReadFull(r, one[:]); err != nil {
 			return 0, 0, nil, fmt.Errorf("读取设备地址失败: %w", err)
@@ -53,21 +53,21 @@ func readPacket(r io.Reader) (addr, cmd byte, data []byte, err error) {
 		}
 	}
 	addr = one[0]
-	// 3) 命令码 + 数据长度
+	// 命令码 + 数据长度
 	hdr := make([]byte, 3)
 	if _, err = io.ReadFull(r, hdr); err != nil {
 		return 0, 0, nil, fmt.Errorf("读取报文头失败: %w", err)
 	}
 	cmd = hdr[0]
 	dataLen := binary.LittleEndian.Uint16(hdr[1:3])
-	// 4) 数据段 + 校验码
+	// 数据段 + 校验码
 	body := make([]byte, dataLen+1)
 	if _, err = io.ReadFull(r, body); err != nil {
 		return 0, 0, nil, fmt.Errorf("读取数据段失败: %w", err)
 	}
 	data = body[:dataLen]
 	got := body[dataLen]
-	// 5) 校验码校验
+	// 校验码校验
 	check := make([]byte, 0, 1+1+2+len(data))
 	check = append(check, addr, cmd)
 	check = append(check, hdr[1:3]...)
@@ -102,7 +102,7 @@ func parseVersion(addr byte, data []byte) (*VersionInfo, error) {
 	return &VersionInfo{
 		Address:   addr,
 		HWVersion: data[0],
-		// 注意：固件版本号为大端序（高字节在前），与官方 SDK 的字节交换处理一致。
+		// 注意：固件版本号为大端序 高字节在前
 		FWVersion: binary.BigEndian.Uint16(data[1:3]),
 		SerialNo:  sn,
 	}, nil

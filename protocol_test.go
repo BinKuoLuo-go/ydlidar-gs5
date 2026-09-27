@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// 校验 buildPacket 生成的报文与开发手册示例一致。
+// 校验 buildPacket 生成的报文
 func TestBuildPacket(t *testing.T) {
 	cases := []struct {
 		name string

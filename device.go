@@ -42,7 +42,7 @@ func WithLogger(l *log.Logger) Option {
 	}
 }
 
-// Open 打开串口并初始化 GS5（推荐流程：获取地址 → 获取参数，见开发手册 6-3）。
+// Open 打开串口并初始化 GS5 流程：获取地址 → 获取参数
 func Open(portName string, opts ...Option) (*Device, error) {
 	d := &Device{
 		portName: portName,
@@ -68,7 +68,7 @@ func Open(portName string, opts ...Option) (*Device, error) {
 
 // init 获取级联设备地址与各设备参数。
 func (d *Device) init() error {
-	// 1. 获取设备地址，确定级联个数
+	// 获取设备地址，确定级联个数
 	addr, err := d.GetDeviceAddress()
 	if err != nil {
 		return fmt.Errorf("获取设备地址失败: %w", err)
@@ -83,7 +83,7 @@ func (d *Device) init() error {
 	default:
 		return fmt.Errorf("未知设备地址 0x%02X", addr)
 	}
-	// 2. 获取各设备参数
+	// 获取各设备参数
 	params, err := d.GetParams()
 	if err != nil {
 		return fmt.Errorf("获取设备参数失败: %w", err)
@@ -264,7 +264,7 @@ func (d *Device) SetBaudRate(code uint8) error {
 	if len(d.addrs) == 3 && code < Baud921600 {
 		return fmt.Errorf("三模块级联需波特率 ≥ 921600（代号 2/3），当前代号 %d", code)
 	}
-	// 1. 设置波特率
+	// 设置波特率
 	if err := d.writeCommand(AddrAll, CmdSetBaudRate, []byte{code}); err != nil {
 		return err
 	}
@@ -279,13 +279,13 @@ func (d *Device) SetBaudRate(code uint8) error {
 	if len(data) < 1 || data[0] != code {
 		return fmt.Errorf("波特率设置应答异常: 回显 0x%02X, 期望 0x%02X", data[0], code)
 	}
-	// 2. 软重启各模组（仍在旧波特率下通信，重启后生效新波特率）
+	// 软重启各模组（仍在旧波特率下通信，重启后生效新波特率）
 	for _, a := range d.addrs {
 		if _, _, _, err := d.command(a, CmdSoftReset, nil, waitSoftReset); err != nil {
 			return fmt.Errorf("软重启设备 0x%02X 失败: %w", a, err)
 		}
 	}
-	// 3. 重配串口波特率
+	// 重配串口波特率
 	if err := d.setPortBaud(newBaud); err != nil {
 		return fmt.Errorf("重配串口波特率失败: %w", err)
 	}

@@ -26,8 +26,8 @@ func angleTheta(k, b, pixelU float64) float64 {
 	return math.Atan(k*pixelU-b) * rad2deg
 }
 
-// transformPoint 将单个原始测距点由像素坐标变换为极坐标（角度 + 距离）。
-// rawDist 为原始距离（mm，低 11 位）；index 为点序号 0~159。
+// transformPoint 将单个原始测距点由像素坐标变换为极坐标（角度 + 距离）
+// rawDist 为原始距离（mm，低 11 位）；index 为点序号 0~159
 func transformPoint(rawDist float64, index int, p *DeviceParams) (angle, dist float64) {
 	pixelU := float64(index)
 	var tempTheta, tempDist, tempX, tempY float64
@@ -90,7 +90,7 @@ func parseFrame(addr byte, data []byte, p *DeviceParams) (*Frame, error) {
 		rawDist := float64(raw & 0x07FF) // 低 11 位距离
 		if rawDist > 0 {
 			pt.Angle, pt.Distance = transformPoint(rawDist, i, p)
-			// 过滤左右相机越过 0° 的越界点（与官方 SDK 一致）
+			// 过滤左右相机越过 0° 的越界点
 			if i < PointCount/2 {
 				if pt.Angle <= 180 {
 					pt.Distance = 0
