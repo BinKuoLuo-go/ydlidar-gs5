@@ -47,8 +47,9 @@ func main() {
 		fmt.Printf("帧[设备0x%02X] 环境光=%d 点数=%d\n", frame.Address, frame.Env, len(frame.Points))
 		for _, p := range frame.Points {
 			if p.Distance > 0 {
-				fmt.Printf("  S%d angle=%.1f° dist=%.1fmm intensity=%d\n",
+				fmt.Printf("  S%d 角度=%.1f° 距离=%.1fmm 强度=%d\n",
 					p.Index+1, p.Angle, p.Distance, p.Intensity)
+
 			}
 		}
 	}
