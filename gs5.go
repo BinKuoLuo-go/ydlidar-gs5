@@ -1,29 +1,4 @@
-// Package gs5 提供 YDLIDAR GS5 固态激光雷达的 Go SDK。
-//
-// GS5 是一款近距离固态雷达（测距范围 70~1000mm），通过串口与外部设备交互。
-// 本包实现了开发手册定义的完整系统命令（获取地址/版本/参数、扫描、停止、复位、设置波特率）
-// 以及点云数据解析，可供上位机直接集成。
-//
-// 典型用法：
-//
-//	dev, err := gs5.Open("COM3")
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//	defer dev.Close()
-//
-//	if err := dev.StartScan(); err != nil {
-//		log.Fatal(err)
-//	}
-//	for {
-//		frame, err := dev.GrabFrame()
-//		if err != nil {
-//			log.Fatal(err)
-//		}
-//		for _, p := range frame.Points {
-//			// 处理 p.Angle / p.Distance / p.Intensity ...
-//		}
-//	}
+//	提供 GS5 固态激光雷达的 Go SDK。
 //
 // 注意：Device 的方法并非并发安全，串口读写应限定在单个 goroutine 中调用。
 package gs5
