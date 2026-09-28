@@ -76,7 +76,7 @@ func (v *VersionInfo) SerialString() string {
 }
 
 func (v *VersionInfo) String() string {
-	return fmt.Sprintf("addr=0x%02X hw=%d fw=%d sn=%q", v.Address, v.HWVersion, v.FWVersion, v.SerialString())
+	return fmt.Sprintf("addr=0x%02X 硬件版本=%d 固件版本=%d 序列号=%q", v.Address, v.HWVersion, v.FWVersion, v.SerialString())
 }
 
 // 常见错误。
